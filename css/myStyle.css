@@ -1,0 +1,38 @@
+@font-face{
+	font-family: 'font';
+	src: url('fonts/Bebas-Regular.otf') format('opentype');
+}  
+
+.jumbotron h1{
+	font-family: font;
+	color: white;
+	font-size: 2em;
+}
+
+.jumbotron {
+	background-color: #212529;
+	font-family: font;
+	font-size: 1.5em;
+}
+
+th {
+	font-family: font;
+	font-size: 1.5em;
+}
+
+td {
+	font-family: font;
+	font-size: 1.5em;
+}
+
+body {
+	background-color: #212529;
+}
+
+p {
+	color: white;
+}
+
+h3 {
+	color: white;
+}
