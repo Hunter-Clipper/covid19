@@ -1,19 +1,19 @@
 <?php
 main();
 function main () {
-	$apiCall = 'https://corona.lmao.ninja/all';
+	$apiCall = 'https://covidtracking.com/api/us';
 	$json_string = curl_get_contents($apiCall);
 	$obj = json_decode($json_string);
-	$totalInfections = $obj->cases;
-	$totalDeaths = $obj->deaths;
-	$TotalRecovered = $obj->recovered;
+	$totalInfections = $obj[0]->positive;
+	$totalDeaths = $obj[0]->death;
+	$TotalRecovered = $obj[0]->recovered;
 
-	$apiCall = 'https://corona.lmao.ninja/countries?sort=country';
+	$apiCall = 'https://covidtracking.com/api/states';
 	$json_string = curl_get_contents($apiCall);
 	
 	$array = json_decode($json_string, TRUE);
 	usort($array, function($a, $b) {
-		return $a['cases'] < $b['cases'];
+		return $a['positive'] < $b['positive'];
 	});
 	$data = json_encode($array, JSON_PRETTY_PRINT);
 	$covid = json_decode($data);
@@ -27,13 +27,13 @@ function main () {
 			<div class = "container">
 			<div class = "col">
 			  <div class="jumbotron">';
-			    echo " <a href='state.php' type='button' class='btn btn-secondary' style='float: right;'>USA STATE CASES</a>";
-				echo '<h1><b>Covid-19 Global Cases</b></h1> 
-				<h3>Global Confirmed Cases: ' . number_format($totalInfections) . '</h3>
-				<h3>Global Confirmed Deaths: ' . number_format($totalDeaths) . '</h3>
-				<h3>Global Confirmed Recoveries: ' . number_format($TotalRecovered) . '</h3>
-				<h3>Global Recovery Rate: ' . round($TotalRecovered / $totalInfections, 2) . '%</h3>
-				<h3>Global Death Rate: ' . round($obj->deaths / $obj->cases, 2) . '%</h3>
+			    echo " <a href='index.php' type='button' class='btn btn-secondary' style='float: right;'>GLOBAL CASES</a>";
+				echo ' <h1><b>Covid-19 Cases USA</b></h1>      
+				<h3>USA Confirmed Cases: ' . number_format($totalInfections) . '</h3>
+				<h3>USA Confirmed Deaths: ' . number_format($totalDeaths) . '</h3>
+				<h3>USA Confirmed Recoveries: ' . number_format($TotalRecovered) . '</h3>
+				<h3>USA Recovery Rate: ' . round($TotalRecovered / $totalInfections, 2) . '%</h3>
+				<h3>USA Death Rate: ' . round($totalDeaths / $totalInfections, 2) . '%</h3>
 				<p>Numbers are updated as of: ' . date("m-d-Y") . ' ' . date("h:i a").'
 			  </div>';
 			echo '<p><b>Disclaimer: </b> these number are as accurate as they can be from various APIs reporting statistic on the COVID-19 pandemic. Some reports may vary.</p>
@@ -41,7 +41,7 @@ function main () {
 			  <thead>
 				<tr>
 				  <th scope="col">#</th>
-				  <th scope="col">Country</th>
+				  <th scope="col">State</th>
 				  <th scope="col">Infections</th>
 				  <th scope="col">Recovered</th>
 				  <th scope="col">Deaths</th>
@@ -49,14 +49,14 @@ function main () {
 				</tr>
 			  </thead>
 			  <tbody>';
-				for ($x = 0; $x <= 210; $x++) {
+				for ($x = 0; $x <= 54; $x++) {
 				  echo '<tr>
 							<th scope="row">' . ($x + 1) . '</th>
-							<td id="country">' . $covid[$x]->country . '</td>
-							<td id="infections">' . number_format($covid[$x]->cases) . '</td>
+							<td id="state">' . $covid[$x]->state . '</td>
+							<td id="infections">' . number_format($covid[$x]->positive) . '</td>
 							<td id="recovered">' . number_format($covid[$x]->recovered) . '</td>
-							<td id="deaths">' . number_format($covid[$x]->deaths) . '</td>
-							<td id="ratio">' . round($covid[$x]->deaths / $covid[$x]->cases, 2) . '%' . '</td>
+							<td id="deaths">' . number_format($covid[$x]->death) . '</td>
+							<td id="ration">' . round($covid[$x]->death / $covid[$x]->positive, 2) . '%' . '</td>
 						</tr>';
 				}
 				  
