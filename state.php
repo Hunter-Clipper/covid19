@@ -19,6 +19,7 @@ function main () {
 	$covid = json_decode($data);
 	echo '<html>
 			<head>
+				<title>COVID-19 USA</title>
 				<link rel="icon" href="css/covid.png" type="image/png">
 				<link href="css/bootstrap.min.css" rel="stylesheet">
 				<link rel="stylesheet" href="css/myStyle.css">
@@ -28,15 +29,17 @@ function main () {
 			<div class = "col">
 			  <div class="jumbotron">';
 			    echo " <a href='index.php' type='button' class='btn btn-secondary' style='float: right;'>GLOBAL CASES</a>";
-				echo ' <h1><b>Covid-19 Cases USA</b></h1>      
-				<h3>USA Confirmed Cases: ' . number_format($totalInfections) . '</h3>
+				echo ' <h1><b>Covid-19 Cases USA</b></h1> ';
+				echo " <a href='michigan.php' type='button' class='btn btn-secondary' style='float: right;'>MICHIGAN CASES</a>";
+				echo '<h3>USA Confirmed Cases: ' . number_format($totalInfections) . '</h3>
 				<h3>USA Confirmed Deaths: ' . number_format($totalDeaths) . '</h3>
 				<h3>USA Confirmed Recoveries: ' . number_format($TotalRecovered) . '</h3>
 				<h3>USA Recovery Rate: ' . round($TotalRecovered / $totalInfections, 2) . '%</h3>
 				<h3>USA Death Rate: ' . round($totalDeaths / $totalInfections, 2) . '%</h3>
 				<p>Numbers are updated as of: ' . date("m-d-Y") . ' ' . date("h:i a").'
 			  </div>';
-			echo '<p><b>Disclaimer: </b> these number are as accurate as they can be from various APIs reporting statistic on the COVID-19 pandemic. Some reports may vary.</p>
+			echo '<p><b>Disclaimer 1: </b> For reports that are reporting 0 are "null" in the APIs there for the number has not been reported from the CDC or WHO.</p>
+			<p><b>Disclaimer 2: </b> these number are as accurate as they can be from various APIs reporting statistic on the COVID-19 pandemic. Some reports may vary.</p>
 			<table class="table table-dark">
 			  <thead>
 				<tr>

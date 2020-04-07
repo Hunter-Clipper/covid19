@@ -19,6 +19,7 @@ function main () {
 	$covid = json_decode($data);
 	echo '<html>
 			<head>
+				<title>COVID-19 Global</title>
 				<link rel="icon" href="css/covid.png" type="image/png">
 				<link href="css/bootstrap.min.css" rel="stylesheet">
 				<link rel="stylesheet" href="css/myStyle.css">
