@@ -1,14 +1,14 @@
 <?php
 main();
 function main () {
-	$apiCall = 'https://corona.lmao.ninja/v3/covid-19/all';
+	$apiCall = 'https://disease.sh/v3/covid-19/all';
 	$json_string = curl_get_contents($apiCall);
 	$obj = json_decode($json_string);
 	$totalInfections = $obj->cases;
 	$totalDeaths = $obj->deaths;
 	$TotalRecovered = $obj->recovered;
 
-	$apiCall = 'https://corona.lmao.ninja/v3/covid-19/countries';
+	$apiCall = 'https://disease.sh/v3/covid-19/countries';
 	$json_string = curl_get_contents($apiCall);
 	
 	$array = json_decode($json_string, TRUE);

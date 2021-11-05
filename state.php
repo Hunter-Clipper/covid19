@@ -1,19 +1,20 @@
 <?php
 main();
 function main () {
-	$apiCall = 'https://covidtracking.com/api/us';
+	$apiCall = 'https://disease.sh/v3/covid-19/countries/usa';
 	$json_string = curl_get_contents($apiCall);
 	$obj = json_decode($json_string);
-	$totalInfections = $obj[0]->positive;
-	$totalDeaths = $obj[0]->death;
-	$TotalRecovered = $obj[0]->recovered;
+	$totalInfections = $obj->cases;
+	$totalDeaths = $obj->deaths;
+	$TotalRecovered = $obj->recovered;
 
-	$apiCall = 'https://covidtracking.com/api/states';
+	$apiCall = 'https://disease.sh/v3/covid-19/states?sort=cases';
 	$json_string = curl_get_contents($apiCall);
 	
 	$array = json_decode($json_string, TRUE);
 	usort($array, function($a, $b) {
-		return $a['positive'] < $b['positive'];
+		if($a['cases']==$b['cases']) return 0;
+    	return $a['cases'] < $b['cases']?1:-1;
 	});
 	$data = json_encode($array, JSON_PRETTY_PRINT);
 	$covid = json_decode($data);
@@ -56,10 +57,10 @@ function main () {
 				  echo '<tr>
 							<th scope="row">' . ($x + 1) . '</th>
 							<td id="state">' . $covid[$x]->state . '</td>
-							<td id="infections">' . number_format($covid[$x]->positive) . '</td>
+							<td id="infections">' . number_format($covid[$x]->cases) . '</td>
 							<td id="recovered">' . number_format($covid[$x]->recovered) . '</td>
-							<td id="deaths">' . number_format($covid[$x]->death) . '</td>
-							<td id="ration">' . round($covid[$x]->death / $covid[$x]->positive, 2) . '%' . '</td>
+							<td id="deaths">' . number_format($covid[$x]->deaths) . '</td>
+							<td id="ration">' . round($covid[$x]->deaths / $covid[$x]->cases, 2) . '%' . '</td>
 						</tr>';
 				}
 				  
