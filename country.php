@@ -8,7 +8,13 @@ function main () {
 	$totalInfections = $obj->cases;
 	$totalDeaths = $obj->deaths;
     $flag = $obj->countryInfo->flag;
-    
+
+	//$apicall = 'https://disease.sh/v3/covid-19/vaccine/coverage/countries/' . $country . '?lastdays=1'
+    //$json_string = curl_get_contents($apiCall);
+	//$objVax = json_decode($json_string);
+    //$todaysDate = "11/5/21";
+	//$TotalVaxs = $objVax->timeline->$todaysDate;
+
 	echo '<html>
 			<head>
 				<title>COVID-19 '. $country .'</title>
@@ -27,6 +33,7 @@ function main () {
 				<h3>'. $country .' Confirmed Tests Ran: ' . number_format($obj->tests) . '</h3>
 				<h3>'. $country .' Confirmed Deaths: ' . number_format($totalDeaths) . '</h3>
 				<h3>'. $country .' Death Rate: ' . round($totalDeaths / $totalInfections, 2) . '%</h3>
+				<h3>'. $country .' Vaxinations: ' . number_format($TotalVaxs) . ' Under construction...</h3>
 				<p>Numbers are updated as of: ' . date("m-d-Y");
 			  echo '</div>';
 
@@ -53,18 +60,26 @@ function main () {
 				});
 				$data = json_encode($array, JSON_PRETTY_PRINT);
 				$covid = json_decode($data);
-			}
-			  for ($x = 0; $x <= 62; $x++) {
+				for ($x = 0; $x <= 62; $x++) {
+					echo '<tr>
+							  <th scope="row">' . ($x + 1) . '</th>
+							  <td id="state"><a href="state.php?state='. $covid[$x]->state .'">' . $covid[$x]->state . '</a></td>
+							  <td id="infections">' . number_format($covid[$x]->cases) . '</td>
+							  <td id="recovered">' . number_format($covid[$x]->recovered) . '</td>
+							  <td id="deaths">' . number_format($covid[$x]->deaths) . '</td>
+							  <td id="ration">' . round($covid[$x]->deaths / $covid[$x]->cases, 2) . '%' . '</td>
+						  </tr>';
+				  }
+			}	else{
 				echo '<tr>
-						  <th scope="row">' . ($x + 1) . '</th>
-						  <td id="state"><a href="state.php?state='. $covid[$x]->state .'">' . $covid[$x]->state . '</a></td>
-						  <td id="infections">' . number_format($covid[$x]->cases) . '</td>
-						  <td id="recovered">' . number_format($covid[$x]->recovered) . '</td>
-						  <td id="deaths">' . number_format($covid[$x]->deaths) . '</td>
-						  <td id="ration">' . round($covid[$x]->deaths / $covid[$x]->cases, 2) . '%' . '</td>
-					  </tr>';
-			  }
-				
+							  <th scope="row">1</th>
+							  <td id="state">No</td>
+							  <td id="infections">Current</td>
+							  <td id="recovered">Data</td>
+							  <td id="deaths">Found</td>
+							  <td id="ration">for '. $country .'</td>
+						  </tr>';
+			}
 		  echo '</tbody>
 		  </table>
 		  </div>
