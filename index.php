@@ -35,7 +35,7 @@ function main () {
 				<h3>Global Confirmed Recoveries: ' . number_format($TotalRecovered) . '</h3>
 				<h3>Global Recovery Rate: ' . round($TotalRecovered / $totalInfections, 2) . '%</h3>
 				<h3>Global Death Rate: ' . round($obj->deaths / $obj->cases, 2) . '%</h3>
-				<p>Numbers are updated as of: ' . date("m-d-Y") . ' ' . date("h:i a").'
+				<p>Numbers are updated as of: ' . date("m-d-Y") .'
 			  </div>';
 			echo '<p><b>Disclaimer: </b> these number are as accurate as they can be from various APIs reporting statistic on the COVID-19 pandemic. Some reports may vary.</p>
 			<table class="table table-dark">
@@ -53,7 +53,7 @@ function main () {
 				for ($x = 0; $x <= 210; $x++) {
 				  echo '<tr>
 							<th scope="row">' . ($x + 1) . '</th>
-							<td id="country">' . $covid[$x]->country . '</td>
+							<td id="country"><a href="#">' . $covid[$x]->country . '</a></td>
 							<td id="infections">' . number_format($covid[$x]->cases) . '</td>
 							<td id="recovered">' . number_format($covid[$x]->recovered) . '</td>
 							<td id="deaths">' . number_format($covid[$x]->deaths) . '</td>
@@ -66,7 +66,7 @@ function main () {
 			</div>
 			</div>
 			<footer class="page-footer font-small pt-4">
-			  <p style="text-align:center;">© 2020 Copyright | Hunter Clipper</p>
+			  <p style="text-align:center;">2021 Copyright | Hunter Clipper</p>
 			</footer>
 			</html>';
 	

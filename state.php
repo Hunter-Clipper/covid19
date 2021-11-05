@@ -37,7 +37,7 @@ function main () {
 				<h3>USA Confirmed Recoveries: ' . number_format($TotalRecovered) . '</h3>
 				<h3>USA Recovery Rate: ' . round($TotalRecovered / $totalInfections, 2) . '%</h3>
 				<h3>USA Death Rate: ' . round($totalDeaths / $totalInfections, 2) . '%</h3>
-				<p>Numbers are updated as of: ' . date("m-d-Y") . ' ' . date("h:i a").'
+				<p>Numbers are updated as of: ' . date("m-d-Y") .'
 			  </div>';
 			echo '<p><b>Disclaimer 1: </b> For reports that are reporting 0 are "null" in the APIs there for the number has not been reported from the CDC or WHO.</p>
 			<p><b>Disclaimer 2: </b> these number are as accurate as they can be from various APIs reporting statistic on the COVID-19 pandemic. Some reports may vary.</p>
@@ -69,7 +69,7 @@ function main () {
 			</div>
 			</div>
 			<footer class="page-footer font-small pt-4">
-			  <p style="text-align:center;">© 2020 Copyright | Hunter Clipper</p>
+			  <p style="text-align:center;">2021 Copyright | Hunter Clipper</p>
 			</footer>
 			</html>';
 	
