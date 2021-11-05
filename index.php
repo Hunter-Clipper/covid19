@@ -28,7 +28,6 @@ function main () {
 			<div class = "container">
 			<div class = "col">
 			  <div class="jumbotron">';
-			    echo " <a href='state.php' type='button' class='btn btn-secondary' style='float: right;'>USA STATE CASES</a>";
 				echo '<h1><b>Covid-19 Global Cases</b></h1> 
 				<h3>Global Confirmed Cases: ' . number_format($totalInfections) . '</h3>
 				<h3>Global Confirmed Deaths: ' . number_format($totalDeaths) . '</h3>
@@ -37,7 +36,9 @@ function main () {
 				<h3>Global Death Rate: ' . round($obj->deaths / $obj->cases, 2) . '%</h3>
 				<p>Numbers are updated as of: ' . date("m-d-Y") .'
 			  </div>';
-			echo '<p><b>Disclaimer: </b> these number are as accurate as they can be from various APIs reporting statistic on the COVID-19 pandemic. Some reports may vary.</p>
+			echo '<p><b>Disclaimer 1: </b> These number are as accurate as they can be from various APIs reporting statistic on the COVID-19 pandemic. Some reports may vary.</p>
+			<p><b>Disclaimer 2: </b> For reports that are reporting 0 are "null" in the APIs there for the number has not been reported from the CDC or WHO.</p>
+			<p><b>Disclaimer 3: </b> these number are as accurate as they can be from various APIs reporting statistic on the COVID-19 pandemic. Some reports may vary.</p>
 			<table class="table table-dark">
 			  <thead>
 				<tr>
@@ -53,7 +54,7 @@ function main () {
 				for ($x = 0; $x <= 210; $x++) {
 				  echo '<tr>
 							<th scope="row">' . ($x + 1) . '</th>
-							<td id="country"><a href="#">' . $covid[$x]->country . '</a></td>
+							<td id="country"><a href="country.php?country='. $covid[$x]->country .'">' . $covid[$x]->country . '</a></td>
 							<td id="infections">' . number_format($covid[$x]->cases) . '</td>
 							<td id="recovered">' . number_format($covid[$x]->recovered) . '</td>
 							<td id="deaths">' . number_format($covid[$x]->deaths) . '</td>
