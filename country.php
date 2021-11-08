@@ -9,9 +9,9 @@ function main () {
 	$totalDeaths = $obj->deaths;
     $flag = $obj->countryInfo->flag;
 
-	//$apicall = 'https://disease.sh/v3/covid-19/vaccine/coverage/countries/' . $country . '?lastdays=1'
-    //$json_string = curl_get_contents($apiCall);
-	//$objVax = json_decode($json_string);
+	$apicallVax = 'https://disease.sh/v3/covid-19/vaccine/coverage/countries/' . $country . '?lastdays=1';
+    $json_string = curl_get_contents($apiCall);
+	$objVax = json_decode($json_string);
     //$todaysDate = "11/5/21";
 	//$TotalVaxs = $objVax->timeline->$todaysDate;
 
@@ -63,7 +63,7 @@ function main () {
 				for ($x = 0; $x <= 62; $x++) {
 					echo '<tr>
 							  <th scope="row">' . ($x + 1) . '</th>
-							  <td id="state"><a href="state.php?state='. $covid[$x]->state .'">' . $covid[$x]->state . '</a></td>
+							  <td id="state">'. $covid[$x]->state . '</td>
 							  <td id="infections">' . number_format($covid[$x]->cases) . '</td>
 							  <td id="recovered">' . number_format($covid[$x]->recovered) . '</td>
 							  <td id="deaths">' . number_format($covid[$x]->deaths) . '</td>
