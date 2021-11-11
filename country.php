@@ -37,7 +37,7 @@ function main () {
 			<div class = "container">
 			<div class = "col">
 			  <div class="jumbotron">';
-			    echo " <a href='index.php' type='button' class='btn btn-secondary'>GLOBAL CASES</a> ";
+			    echo " <a href='global' type='button' class='btn btn-secondary'>🌎 GLOBAL CASES</a> ";
 				echo " <img src='". $flag ."' style='float: right;' alt='flag' width=250>";
 				echo ' <h1><b>Covid-19 Cases '. $country .'</b></h1> ';
 				echo '<h3>'. $country .' Confirmed Cases: ' . number_format($totalInfections) . '</h3>
@@ -59,7 +59,6 @@ function main () {
 				<th scope="col">Infections</th>
 				<th scope="col">Recovered</th>
 				<th scope="col">Deaths</th>
-				<th scope="col">D:I Ratio</th>
 			  </tr>
 			</thead>
 			<tbody>';
@@ -80,7 +79,6 @@ function main () {
 							  <td id="infections">' . number_format($covid[$x]->cases) . '</td>
 							  <td id="recovered">' . number_format($covid[$x]->recovered) . '</td>
 							  <td id="deaths">' . number_format($covid[$x]->deaths) . '</td>
-							  <td id="ratio">' . round($covid[$x]->deaths / $covid[$x]->cases, 2) . '%' . '</td>
 						  </tr>';
 				  }
 			}	else{
@@ -90,7 +88,6 @@ function main () {
 							  <td id="infections">Current</td>
 							  <td id="recovered">Data</td>
 							  <td id="deaths">Found</td>
-							  <td id="ratio">for '. $country .'</td>
 							  <td id="vaxxed"></td>
 						  </tr>';
 			}
